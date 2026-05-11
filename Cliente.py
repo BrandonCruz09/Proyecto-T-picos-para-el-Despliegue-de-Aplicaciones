@@ -5,7 +5,7 @@ import sys
 recibiendo = True
 
 def recibir_mensajes(cliente_socket):
-    """Hilo para escuchar mensajes del servidor."""
+   
     global recibiendo
     while recibiendo:
         try:
@@ -14,7 +14,7 @@ def recibir_mensajes(cliente_socket):
                 break
             print(mensaje)
         except (ConnectionResetError, BrokenPipeError, OSError):
-            print("\n[!] Desconectado del servidor.")
+            print("\n[!] Desconectado del servidor.  inicie de nuevo el programa o terminelo.")
             break
     recibiendo = False
     try:
