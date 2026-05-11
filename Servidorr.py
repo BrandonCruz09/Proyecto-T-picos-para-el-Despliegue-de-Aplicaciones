@@ -13,12 +13,12 @@ def manejar_cliente(cliente_socket, direccion):
             if not mensaje:
                 break
             
-            # El servidor muestra lo que recibiÛ
+            # El servidor muestra lo que recibi√≥
             print(f"\n[CLIENTE {direccion}] dice: {mensaje}")
             
-            # ReenvÌa a los dem·s clientes
+            # Reenv√≠a a los dem√°s clientes
             for c in clientes:
-                if c != cliente_socket: # Opcional: no envi·rselo al mismo que lo mandÛ
+                if c != cliente_socket: # Opcional: no envi√°rselo al mismo que lo mand√≥
                     c.send(f"Mensaje de otro cliente: {mensaje}".encode('utf-8'))
         except:
             break
@@ -30,7 +30,7 @@ def entrada_servidor():
     """Hilo para que el administrador del servidor pueda escribir mensajes."""
     while True:
         mensaje_admin = input("Servidor (Escribe un mensaje para todos): \n")
-        # El servidor envÌa su mensaje a TODOS los clientes conectados
+        # El servidor env√≠a su mensaje a TODOS los clientes conectados
         for c in clientes:
             try:
                 c.send(f"AVISO DEL SERVIDOR: {mensaje_admin}".encode('utf-8'))
