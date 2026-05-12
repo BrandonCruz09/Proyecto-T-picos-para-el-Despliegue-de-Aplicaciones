@@ -3,6 +3,7 @@ import socket
 import threading
 import signal
 import sys
+import datetime
 
 clientes = []
 clientes_lock = threading.Lock()   # Protege el acceso a la lista
@@ -31,7 +32,20 @@ def manejar_cliente(cliente_socket, direccion):
             try:
                 mensaje = cliente_socket.recv(1024).decode('utf-8')
                 if not mensaje:
-                    break
+                    break 
+                comando = mensaje.strip().lower()
+                
+                if comando == "/usuarios":
+                    respuesta = f"[SISTEMA] Hay {len(clientes)} usuario(s) conectado(s) actualmente."
+                    cliente_socket.send(respuesta.encode('utf-8'))
+                    continue  
+                
+                elif comando == "/hora":
+                    hora_actual = datetime.datetime.now().strftime("%H:%M:%S")
+                    respuesta = f"[SISTEMA] La hora del servidor es {hora_actual}."
+                    cliente_socket.send(respuesta.encode('utf-8'))
+                    continue  
+                
                 print(f"\n[CLIENTE {direccion}] dice: {mensaje}")
                 # Reenvía a todos los demás
                 broadcast(f"Mensaje de {direccion}: {mensaje}", emisor_socket=cliente_socket)

@@ -26,7 +26,7 @@ def iniciar_cliente(host='localhost', puerto=12345):
     cliente_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     try:
         cliente_socket.connect((host, puerto))
-        print("Conectado al chat. Escribe '/salir' para terminar.")
+        print("Conectado al chat. Escribe '/salir' para terminar, '/usuarios' para ver activos, o '/hora' para ver la hora del servidor.")
     except ConnectionRefusedError:
         print("No se pudo conectar al servidor.")
         sys.exit(1)
